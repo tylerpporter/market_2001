@@ -5,5 +5,9 @@ class Item
     @name = params[:name]
     @price = params[:price]
   end
-  
+
+  def convert_price
+    @price.delete("$").to_f
+  end
+
 end
