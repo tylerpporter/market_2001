@@ -30,16 +30,6 @@ class Market
     all_items.uniq.sort
   end
 
-  def total_quantity
-    item_hash = Hash.new(0)
-    @vendors.each do |vendor|
-      vendor.inventory.each do |item, quantity|
-        item_hash[item] += quantity
-      end
-    end
-    item_hash
-  end
-
   def total_inventory
    items = @vendors.flat_map do |vendor|
      vendor.inventory.keys
