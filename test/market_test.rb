@@ -77,13 +77,6 @@ class MarketTest < Minitest::Test
     assert_equal 100, @market.total_quantity(@item1)
   end
 
-  def test_it_can_select_all_vendors_that_have_given_item
-    @market.add_vendor(@vendor1)
-    @market.add_vendor(@vendor2)
-    @market.add_vendor(@vendor3)
-    assert_equal [@vendor1, @vendor3], @market.vendors_by_item(@item1)
-  end
-
   def test_it_can_return_total_inventory
     @market.add_vendor(@vendor1)
     @market.add_vendor(@vendor2)

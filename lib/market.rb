@@ -16,9 +16,7 @@ class Market
   end
 
   def vendors_that_sell(item)
-    @vendors.select do |vendor|
-      !vendor.inventory[item].zero?
-    end
+    @vendors.select {|vendor| !vendor.inventory[item].zero?}
   end
 
   def sorted_item_list
@@ -38,15 +36,11 @@ class Market
     @vendors.sum {|vendor| vendor.inventory[item]}
   end
 
-  def vendors_by_item(item)
-    @vendors.select {|vendor| !vendor.inventory[item].zero?}
-  end
-
   def total_inventory
    all_items.reduce ({}) do |by_item, item|
      by_item[item] = {
        quantity: total_quantity(item),
-       vendors: vendors_by_item(item)
+       vendors: vendors_that_sell(item)
      }
      by_item
    end
@@ -60,7 +54,7 @@ class Market
 
   def sell(item, quantity)
     return false if quantity > total_inventory[item][:quantity]
-    vendors_by_item(item).each do |vender|
+    vendors_that_sell(item).each do |vender|
       if vender.inventory[item].zero?
         next
       elsif vender.inventory[item] >= quantity
