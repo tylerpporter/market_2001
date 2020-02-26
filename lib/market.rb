@@ -47,9 +47,7 @@ class Market
    items = total_inventory.select do |item, data|
      data[:quantity] > 50 && data[:vendors].size > 1
    end
-   items.map do |item, data|
-     item
-   end
- end
+   items.map {|item, data| item}
+  end
 
 end
