@@ -47,7 +47,7 @@ class Market
    items.reduce ({}) do |by_item, item|
      by_item[item] = {
        quantity: @vendors.sum { |vendor| vendor.inventory[item]},
-       vendors: @vendors.select { |vendor| vendor.inventory.include? item}
+       vendors: @vendors.select { |vendor| vendor.inventory.include?(item)}
      }
      by_item
    end
