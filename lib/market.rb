@@ -54,15 +54,15 @@ class Market
 
   def sell(item, quantity)
     return false if quantity > total_inventory[item][:quantity]
-    vendors_that_sell(item).each do |vender|
-      if vender.inventory[item].zero?
+    vendors_that_sell(item).each do |vendor|
+      if vendor.inventory[item].zero?
         next
-      elsif vender.inventory[item] >= quantity
-        vender.inventory[item] -= quantity
+      elsif vendor.inventory[item] >= quantity
+        vendor.inventory[item] -= quantity
         true
-      elsif vender.inventory[item] < quantity
-        quantity = quantity - vender.inventory[item]
-        vender.inventory[item] = 0
+      elsif vendor.inventory[item] < quantity
+        quantity = quantity - vendor.inventory[item]
+        vendor.inventory[item] = 0
       end
     end
   end
