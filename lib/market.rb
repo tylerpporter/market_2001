@@ -40,14 +40,17 @@ class Market
     item_hash
   end
 
-  # def total_inventory
-  #   quantity_hash = {}
-  #   item_hash = {}
-  #   total_quantity.each do |item, quantity|
-  #     quantity_hash[:quantity] = quantity
-  #     item_hash[item] = quantity_hash
-  #   end
-  #   require "pry"; binding.pry
-  # end
+  def total_inventory
+   items = @vendors.flat_map do |vendor|
+     vendor.inventory.keys
+   end.uniq
+   items.reduce ({}) do |by_item, item|
+     by_item[item] = {
+       quantity: @vendors.sum { |vendor| vendor.inventory[item]},
+       vendors: @vendors.select { |vendor| vendor.inventory.include? item}
+     }
+     by_item
+   end
+  end
 
 end

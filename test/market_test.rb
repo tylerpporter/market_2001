@@ -59,17 +59,9 @@ class MarketTest < Minitest::Test
     expected = ["Banana Nice Cream", "Peach", "Peach-Raspberry Nice Cream", "Tomato"]
     assert_equal expected, @market.sorted_item_list
   end
-
-  def test_it_can_return_total_quantity_of_all_items
-    @market.add_vendor(@vendor1)
-    @market.add_vendor(@vendor2)
-    @market.add_vendor(@vendor3)
-    expected = {@item1=>100, @item2=>7, @item3=>25, @item4=>50}
-    assert_equal expected, @market.total_quantity
-  end
-
+  
   def test_it_can_return_total_inventory
-    skip
+
     @market.add_vendor(@vendor1)
     @market.add_vendor(@vendor2)
     @market.add_vendor(@vendor3)
