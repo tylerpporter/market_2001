@@ -1,9 +1,10 @@
 class Market
-  attr_reader :name, :vendors
+  attr_reader :name, :vendors, :date
 
   def initialize(name)
     @name = name
     @vendors = []
+    @date = Date.today.strftime("%d/%m/%Y")
   end
 
   def add_vendor(vendor)
@@ -24,7 +25,7 @@ class Market
     @vendors.reduce([]) do |all_items, vendor|
       all_items << vendor.item_names
       all_items
-    end.flatten.uniq.sort  
+    end.flatten.uniq.sort
   end
 
   def all_items
