@@ -36,11 +36,20 @@ class Market
    end.uniq
    items.reduce ({}) do |by_item, item|
      by_item[item] = {
-       quantity: @vendors.sum { |vendor| vendor.inventory[item]},
-       vendors: @vendors.select { |vendor| vendor.inventory.include?(item)}
+       quantity: @vendors.sum {|vendor| vendor.inventory[item]},
+       vendors: @vendors.select {|vendor| vendor.inventory.include?(item)}
      }
      by_item
    end
   end
+
+  def overstocked_items
+   items = total_inventory.select do |item, data|
+     data[:quantity] > 50 && data[:vendors].size > 1
+   end
+   items.map do |item, data|
+     item
+   end
+ end
 
 end
