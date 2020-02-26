@@ -1,9 +1,10 @@
 class Market
-  attr_reader :name, :vendors
+  attr_reader :name, :vendors, :date
 
   def initialize(name)
     @name = name
     @vendors = []
+    @date = Date.today.strftime("%d/%m/%Y")
   end
 
   def add_vendor(vendor)
@@ -24,7 +25,7 @@ class Market
     @vendors.reduce([]) do |all_items, vendor|
       all_items << vendor.item_names
       all_items
-    end.flatten.uniq.sort  
+    end.flatten.uniq.sort
   end
 
   def all_items
@@ -55,6 +56,21 @@ class Market
    total_inventory.select do |item, data|
      data[:quantity] > 50 && data[:vendors].size > 1
    end.keys
+  end
+
+  def sell(item, quantity)
+    return false if quantity > total_inventory[item][:quantity]
+    vendors_by_item(item).each do |vender|
+      if vender.inventory[item].zero?
+        next
+      elsif vender.inventory[item] >= quantity
+        vender.inventory[item] -= quantity
+        true
+      elsif vender.inventory[item] < quantity
+        quantity = quantity - vender.inventory[item]
+        vender.inventory[item] = 0
+      end
+    end
   end
 
 end
