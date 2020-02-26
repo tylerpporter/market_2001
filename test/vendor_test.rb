@@ -19,11 +19,18 @@ class VendorTest < Minitest::Test
     assert_equal ({}), @vendor.inventory
   end
 
-  def test_it_can_add_and_check_stock
+  def test_it_can_add_inventory
+    @vendor.stock(@item1, 30)    
+    assert_equal ({@item1=>30}), @vendor.inventory
+  end
+
+  def test_it_can_add_stock
+    assert_equal 0, @vendor.check_stock(@item1)
     @vendor.stock(@item1, 30)
     assert_equal 30, @vendor.check_stock(@item1)
-    @vendor.stock(@item2, 12)
-    assert_equal ({@item1=>30, @item2=>12}), @vendor.inventory
+    @vendor.stock(@item1, 25)
+    assert_equal 55, @vendor.check_stock(@item1)
   end
+
 
 end
