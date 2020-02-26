@@ -20,7 +20,7 @@ class VendorTest < Minitest::Test
   end
 
   def test_it_can_add_inventory
-    @vendor.stock(@item1, 30)    
+    @vendor.stock(@item1, 30)
     assert_equal ({@item1=>30}), @vendor.inventory
   end
 
@@ -32,5 +32,16 @@ class VendorTest < Minitest::Test
     assert_equal 55, @vendor.check_stock(@item1)
   end
 
+  def test_it_can_calculate_potential_item_revenue
+    @vendor.stock(@item1, 35)
+    @vendor.stock(@item2, 7)
+    assert_equal [26.25, 3.5], @vendor.potential_item_revenue
+  end
+
+  def test_it_can_calculate_potential_revenue
+    @vendor.stock(@item1, 35)
+    @vendor.stock(@item2, 7)
+    assert_equal 29.75, @vendor.potential_revenue
+  end
 
 end
