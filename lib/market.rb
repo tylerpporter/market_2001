@@ -21,11 +21,10 @@ class Market
   end
 
   def sorted_item_list
-    all_items = []
-    @vendors.each do |vendor|
+    @vendors.reduce([]) do |all_items, vendor|
       all_items << vendor.item_names
-    end
-    all_items.flatten.uniq.sort
+      all_items
+    end.flatten.uniq.sort  
   end
 
   def all_items
