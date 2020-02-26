@@ -44,4 +44,10 @@ class VendorTest < Minitest::Test
     assert_equal 29.75, @vendor.potential_revenue
   end
 
+  def test_it_can_create_collection_of_item_names
+    @vendor.stock(@item1, 35)
+    @vendor.stock(@item2, 7)
+    assert_equal ['Peach', 'Tomato'], @vendor.item_names
+  end
+
 end

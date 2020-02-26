@@ -16,4 +16,8 @@ class ItemTest < Minitest::Test
     assert_equal "$0.75", @item1.price
   end
 
+  def test_it_can_convert_price_to_float
+    assert_equal 0.75, @item1.convert_price
+  end
+
 end
