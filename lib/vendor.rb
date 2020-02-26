@@ -15,11 +15,11 @@ class Vendor
   end
 
   def potential_item_revenue
-    potential_item_revenue = []
+    items = []
     @inventory.each do |item, quantity|
-      potential_item_revenue << item.convert_price * quantity
+      items << item.convert_price * quantity
     end
-    potential_item_revenue
+    items
   end
 
   def potential_revenue
