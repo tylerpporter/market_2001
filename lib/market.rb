@@ -19,17 +19,12 @@ class Market
     @vendors.select {|vendor| !vendor.inventory[item].zero?}
   end
 
-  def sorted_item_list
-    @vendors.reduce([]) do |all_items, vendor|
-      all_items << vendor.item_names
-      all_items
-    end.flatten.uniq.sort
+  def all_items
+    @vendors.flat_map {|vendor| vendor.inventory.keys}.uniq
   end
 
-  def all_items
-    @vendors.flat_map do |vendor|
-      vendor.inventory.keys
-    end.uniq
+  def sorted_item_list
+    all_items.map(&:name).sort
   end
 
   def total_quantity(item)
